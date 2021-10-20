@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\DeskStoreRequest;
-use App\Http\Resources\Api\DescResource;
-use Illuminate\Http\Request;
+use App\Http\Resources\Api\DeskResource;
 use \App\Models\Desk;
 
-class DescController extends Controller
+class DeskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class DescController extends Controller
      */
     public function index()
     {
-        return DescResource::collection(Desk::with("lists")->get());
+        return DeskResource::collection(Desk::all());
     }
 
     /**
@@ -30,7 +29,7 @@ class DescController extends Controller
     {
         $created_desk = Desk::create($request->validated());
 
-        return new DescResource($created_desk);
+        return new DeskResource($created_desk);
     }
 
     /**
@@ -39,9 +38,9 @@ class DescController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Desk $desk)
     {
-        return new DescResource(Desk::with("lists")->findOrFail($id));
+        return new DeskResource($desk);
     }
 
     /**
@@ -51,9 +50,11 @@ class DescController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DeskStoreRequest $request, Desk $desk)
     {
-        //
+        $desk->update($request->validated());
+
+        return new DeskResource($desk);
     }
 
     /**
@@ -62,8 +63,10 @@ class DescController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Desk $desk)
     {
-        //
+        $desk->delete();
+
+        return response()->noContent();
     }
 }
