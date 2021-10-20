@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\DeskStoreRequest;
 use App\Http\Resources\Api\DescResource;
 use Illuminate\Http\Request;
 use \App\Models\Desk;
@@ -25,9 +26,11 @@ class DescController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DeskStoreRequest $request)
     {
-        //
+        $created_desk = Desk::create($request->validated());
+
+        return new DescResource($created_desk);
     }
 
     /**
