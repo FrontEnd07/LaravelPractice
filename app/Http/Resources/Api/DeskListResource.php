@@ -4,12 +4,12 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DescResource extends JsonResource
+class DeskListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
@@ -19,7 +19,6 @@ class DescResource extends JsonResource
             "name" => $this->name,
             "created_at" => $this->created_at,
 //            "updated_at" => $this->updated_at,
-            "lists" => DeskListResource::collection($this->lists),
         ];
     }
 }

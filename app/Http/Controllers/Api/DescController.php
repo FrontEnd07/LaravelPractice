@@ -16,7 +16,7 @@ class DescController extends Controller
      */
     public function index()
     {
-        return DescResource::collection(Desk::all());
+        return DescResource::collection(Desk::with("lists")->get());
     }
 
     /**
@@ -38,7 +38,7 @@ class DescController extends Controller
      */
     public function show($id)
     {
-        return new DescResource(Desk::findOrFail($id));
+        return new DescResource(Desk::with("lists")->findOrFail($id));
     }
 
     /**
