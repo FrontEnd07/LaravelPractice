@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'Practice Api editer',
+                'title' => 'Practice Api editor',
             ],
 
             'routes' => [
