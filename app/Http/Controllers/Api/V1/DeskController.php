@@ -20,6 +20,34 @@ class DeskController extends Controller
     }
 
     /**
+     * @OA\Post(
+     * path="/api/v1/desk",
+     * summary="Add user in table `desk`",
+     * description="Добавить пользователя",
+     * operationId="AddUser",
+     * tags={"Dask"},
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Создайте пользователя для таблицы desk",
+     *    @OA\JsonContent(
+     *       required={"name"},
+     *       @OA\Property(property="name", type="string", example="Naimjon"),
+     *    ),
+     * ),
+     * @OA\Response(
+     *    response=201,
+     *    description="Successful Response",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="id", type="integer", example="10"),
+     *       @OA\Property(property="name", type="string", maxLength=255, example="Naimjon"),
+     *       @OA\Property(property="created_at", type="string", example="2021-10-21T17:12:39.000000Z"),
+     *       @OA\Property(property="lists", type="array", @OA\Items()),
+     *     )
+     *  )
+     * )
+     */
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -29,7 +57,7 @@ class DeskController extends Controller
     {
         $created_desk = Desk::create($request->validated());
 
-        return new DeskResource($created_desk);
+        return response()->json(new DeskResource($created_desk), 201);
     }
 
     /**
@@ -54,7 +82,7 @@ class DeskController extends Controller
     {
         $desk->update($request->validated());
 
-        return new DeskResource($desk);
+        return response()->json(new DeskResource($desk), 200);
     }
 
     /**

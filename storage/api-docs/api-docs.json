@@ -1,0 +1,73 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Тестовый интерфейс Api",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/desk": {
+            "post": {
+                "tags": [
+                    "Dask"
+                ],
+                "summary": "Add user in table `desk`",
+                "description": "Добавить пользователя",
+                "operationId": "AddUser",
+                "requestBody": {
+                    "description": "Создайте пользователя для таблицы desk",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Naimjon"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "10"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "maxLength": 255,
+                                            "example": "Naimjon"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2021-10-21T17:12:39.000000Z"
+                                        },
+                                        "lists": {
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
